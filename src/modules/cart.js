@@ -7,4 +7,4 @@ const cart = () => {
   modalCartClose.addEventListener("click", () => modalСart.style.display = "");
 };
 
-cart();
+export default cart;

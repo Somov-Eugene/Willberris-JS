@@ -23,4 +23,4 @@ const getGoods = () => {
   // const goods = JSON.parse(localStorage.getItem("goods"));
 };
 
-getGoods();
+export default getGoods;
