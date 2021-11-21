@@ -53,11 +53,11 @@ const getGoods = () => {
   });
 
   const goods = localStorage.getItem("goods");
-  if (goods && window.location.pathname === "/goods.html") {
+  if (goods && window.location.pathname.includes("goods.html")) {
     renderGoods(JSON.parse(goods));
   }
 
-  if (window.location.pathname === "/index.html") {
+  if (window.location.pathname.includes("index.html")) {
     document.querySelector(".more").addEventListener("click", (event) => {
       event.preventDefault();
       getData("All", "");
