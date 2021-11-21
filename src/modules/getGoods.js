@@ -34,7 +34,7 @@ const getGoods = () => {
         const filteredData = category ? data.filter((item) => item[category] === value) : data;
         localStorage.setItem("goods", JSON.stringify(filteredData));
 
-        if (window.location.pathname !== "/goods.html") {
+        if (!window.location.pathname.includes("goods.html")) {
           window.location.href = "goods.html";
         } else {
           renderGoods(filteredData);
