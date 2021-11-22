@@ -60,7 +60,7 @@ const getGoods = () => {
   if (window.location.pathname.includes("index.html")) {
     document.querySelector(".more").addEventListener("click", (event) => {
       event.preventDefault();
-      getData("All", "");
+      getData(); /* All goods */
     });
   }
 };
