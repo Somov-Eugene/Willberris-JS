@@ -4,6 +4,7 @@ const cart = () => {
   const modalCartClose = modalСart.querySelector(".modal-close");
   const goodsContainer = document.querySelector(".long-goods-list");
   const cartTable = document.querySelector(".cart-table__goods");
+  const cardTableTotal = document.querySelector(".card-table__total");
   const modalForm = document.querySelector(".modal-form");
 
   const clearCart = () => {
@@ -62,30 +63,37 @@ const cart = () => {
   };
 
   const renderCartGoods = (goods) => {
+    let totalSum = 0;
     cartTable.innerHTML = "";
-    goods.forEach((good) => {
+
+    goods.forEach(({ id, name, quantity, price }) => {
       const tr = document.createElement("tr");
+      const goodSum = (+quantity) * (+price);
+      totalSum += goodSum;
+
       tr.innerHTML = `
-        <td>${good.name}</td>
-        <td>$${good.price}</td>
+        <td>${name}</td>
+        <td>$${price}</td>
         <td><button class="cart-btn-minus">-</button></td>
-        <td>${good.quantity}</td>
+        <td>${quantity}</td>
         <td><button class="cart-btn-plus">+</button></td>
-        <td>${+good.quantity * +good.price}</td>
+        <td>$${goodSum}</td>
         <td><button class="cart-btn-delete">x</button></td>
       `;
       cartTable.append(tr);
 
       tr.addEventListener("click", (event) => {
         if (event.target.classList.contains("cart-btn-minus")) {
-          minusCartItem(good.id);
+          minusCartItem(id);
         } else if (event.target.classList.contains("cart-btn-plus")) {
-          plusCartItem(good.id);
+          plusCartItem(id);
         } else if (event.target.classList.contains("cart-btn-delete")) {
-          deleteCartItem(good.id);
+          deleteCartItem(id);
         };
       });
     });
+
+    cardTableTotal.textContent = `$${totalSum}`;
   };
 
   const sendForm = (name, phone) => {
@@ -105,7 +113,6 @@ const cart = () => {
         modalСart.style.display = "";
         clearCart();
       });
-
   };
 
   modalForm.addEventListener("submit", (event) => {
